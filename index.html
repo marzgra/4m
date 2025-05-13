@@ -125,6 +125,56 @@
       pointer-events: none;
       z-index: 1;
     }
+
+    .gallery-slider {
+      position: relative;
+      max-width: 90%;
+      margin: 2em auto;
+      overflow: hidden;
+      border-radius: 16px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    }
+    
+    .slides {
+      display: flex;
+      transition: transform 0.6s ease;
+    }
+    
+    .slide {
+      min-width: 100%;
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px;
+    }
+    
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      color: #c84e4e;
+      font-size: 2em;
+      padding: 0.2em 0.6em;
+      cursor: pointer;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 3;
+    }
+    
+    .prev:hover, .next:hover {
+      background: #ffeaea;
+    }
+    
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    
+    @media (max-width: 600px) {
+      .slide { height: 180px; }
+      .prev, .next { font-size: 1.5em; }
+    }
+
   </style>
 </head>
 <body>
@@ -146,7 +196,15 @@
     Życzę Ci spełnienia marzeń (jeśli jeszcze jakieś CI zostały ;) ) i jeszcze więcej wspólnych chwil, które będą naszą codziennością. Zawsze obok, trzymając się za ręce. Kocham Cię!!!
   </p>
 
-  <div class="image-placeholder" style="background-image: url('foto3.jpg');"></div>
+  <div class="gallery-slider">
+    <div class="slides">
+      <div class="slide" style="background-image: url('twoje_zdjecie1.jpg');"></div>
+      <div class="slide" style="background-image: url('twoje_zdjecie2.jpg');"></div>
+      <div class="slide" style="background-image: url('twoje_zdjecie3.jpg');"></div>
+    </div>
+    <button class="prev" onclick="plusSlides(-1)">❮</button>
+    <button class="next" onclick="plusSlides(1)">❯</button>
+  </div>
 
   <footer>
     Stworzone z miłością tylko dla Ciebie – Twoja Kicia Kocia
@@ -210,6 +268,23 @@
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
+
+  let currentSlide = 0;
+  
+  function showSlide(index) {
+    const slides = document.querySelector(".slides");
+    const totalSlides = document.querySelectorAll(".slide").length;
+    currentSlide = (index + totalSlides) % totalSlides;
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+  
+  function plusSlides(n) {
+    showSlide(currentSlide + n);
+  }
+  
+  showSlide(0);
+
+  
 </script>
 
 </body>
