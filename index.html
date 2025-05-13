@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dla Ciebie, Koteczku ♥️</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom, #fef9f4, #fffaf7);
+      color: #3e3e3e;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2em 1em;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 0.5em;
+      color: #d46a6a;
+      animation: fadeIn 1.5s ease-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      line-height: 1.6;
+      margin: 1.5em 0;
+      animation: fadeIn 2s ease;
+    }
+
+    .image-placeholder {
+      width: 90%;
+      max-width: 300px;
+      height: 200px;
+      margin: 1.5em auto;
+      border-radius: 12px;
+      background-color: #fbeaea;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .section-title {
+      font-size: 1.6em;
+      margin-top: 2em;
+      color: #c84e4e;
+      border-bottom: 1px solid #e9dede;
+      padding-bottom: 0.3em;
+      display: inline-block;
+    }
+
+    ul {
+      text-align: left;
+      max-width: 600px;
+      margin: 1em auto;
+      padding-left: 1em;
+    }
+
+    ul li {
+      margin: 0.8em 0;
+      font-size: 1.1em;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "♥";
+      color: #d46a6a;
+      margin-right: 0.5em;
+    }
+
+    footer {
+      margin-top: 3em;
+      font-size: 0.9em;
+      color: #999;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2em; }
+      p, ul li { font-size: 1em; }
+    }
+
+    /* Serduszka */
+    .heart {
+      position: fixed;
+      width: 16px;
+      height: 16px;
+      background: pink;
+      clip-path: polygon(50% 0%, 61% 15%, 75% 0%, 100% 25%, 50% 100%, 0 25%, 25% 0%, 39% 15%);
+      opacity: 0.7;
+      animation: float 6s ease-in infinite;
+      z-index: 1;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(-800px) scale(0.6);
+        opacity: 0;
+      }
+    }
+
+    /* Fajerwerki / konfetti */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti"></canvas>
+
+<div class="container">
+  <h1>Maciusiu! Mój Koteczku!</h1>
+
+  <div class="image-placeholder" style="background-image: url('foto1.jpg');"></div>
+
+  <p>
+    W dniu Twoich imienin chcę Ci powiedzieć, jak bardzo jestem wdzięczna, że jesteś. Jesteś moim wsparciem, moją radością i bezpiecznym domkiem! Kocham w Tobie Twoje ciepełko, gałkankowość i to, jak potrafisz sprawić, że wszystkie troski w życiu znikają.
+  </p>
+
+  <div class="image-placeholder" style="background-image: url('foto1.jpg');"></div>
+
+  <p>
+    Życzę Ci spełnienia marzeń (jeśli jeszcze jakieś CI zostały ;) ) i jeszcze więcej wspólnych chwil, które będą naszą codziennością. Zawsze obok, trzymając się za ręce. Kocham Cię!!!
+  </p>
+
+  <div class="image-placeholder" style="background-image: url('foto2.jpg');"></div>
+
+  <footer>
+    Stworzone z miłością tylko dla Ciebie – Twoja Kicia Kocia
+  </footer>
+</div>
+
+<script>
+  // Serduszka
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * window.innerWidth + 'px';
+    heart.style.background = ['#fbb', '#fcc', '#fdd', '#eec', '#fde'][Math.floor(Math.random() * 5)];
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+  setInterval(createHeart, 300);
+
+  // Konfetti
+  const canvas = document.getElementById("confetti");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let particles = [];
+
+  function createConfetti() {
+    const colors = ["#ffd1dc", "#ffdee3", "#e0c3fc", "#c2e9fb"];
+    for (let i = 0; i < 5; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: 0,
+        size: Math.random() * 4 + 2,
+        speedY: Math.random() * 2 + 1,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        alpha: 1
+      });
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p, i) => {
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = p.alpha;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      p.y += p.speedY;
+      p.alpha -= 0.005;
+      if (p.alpha <= 0) particles.splice(i, 1);
+    });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+  setInterval(createConfetti, 300);
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
