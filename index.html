@@ -24,6 +24,89 @@
       z-index: 2;
     }
 
+    .envelope-wrapper {
+      position: relative;
+      width: 90vw;
+      max-width: 800px;
+      height: 500px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background: #f9f1f3;
+      border: 2px solid #e3a6b2;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 1s ease-in-out;
+      z-index: 2;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: #e3a6b2;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top;
+      transition: transform 1s ease-in-out;
+      z-index: 3;
+    }
+
+    .seal {
+      position: absolute;
+      top: 225px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 50px;
+      background: #ffb6c1;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      color: white;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+      z-index: 4;
+      transition: opacity 0.3s ease;
+    }
+
+    .letter {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      font-size: 18px;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      overflow-y: auto;
+      z-index: 5;
+    }
+
+    .open .flap {
+      transform: rotateX(-180deg);
+    }
+
+    .open .seal {
+      opacity: 0;
+    }
+
+    .open .letter {
+      opacity: 1;
+    }
+
     h1 {
       font-size: 2.5em;
       margin-bottom: 0.5em;
@@ -134,12 +217,12 @@
       border-radius: 16px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.1);
     }
-    
+
     .slides {
       display: flex;
       transition: transform 0.6s ease;
     }
-    
+
     .slide {
       min-width: 100%;
       height: 250px;
@@ -147,7 +230,7 @@
       background-position: center;
       border-radius: 16px;
     }
-    
+
     .prev, .next {
       position: absolute;
       top: 50%;
@@ -162,14 +245,14 @@
       transition: background 0.3s;
       z-index: 3;
     }
-    
+
     .prev:hover, .next:hover {
       background: #ffeaea;
     }
-    
+
     .prev { left: 10px; }
     .next { right: 10px; }
-    
+
     @media (max-width: 600px) {
       .slide { height: 180px; }
       .prev, .next { font-size: 1.5em; }
@@ -181,29 +264,28 @@
 
 <canvas id="confetti"></canvas>
 
+
 <div class="container">
-  <h1>Maciusiu! Mój Koteczku!</h1>
-
-  <div class="image-placeholder" style="background-image: url('foto2.jpg');"></div>
-
-  <p>
-    W dniu Twoich imienin chcę Ci powiedzieć, jak bardzo jestem wdzięczna, że jesteś. Jesteś moim wsparciem, moją radością i bezpiecznym domkiem! Kocham w Tobie Twoje ciepełko, gałkankowość i to, jak potrafisz sprawić, że wszystkie troski w życiu znikają.
-  </p>
-
-  <div class="image-placeholder" style="background-image: url('foto1.jpg');"></div>
-
-  <p>
-    Życzę Ci spełnienia marzeń (jeśli jeszcze jakieś CI zostały ;) ) i jeszcze więcej wspólnych chwil, które będą naszą codziennością. Zawsze obok, trzymając się za ręce. Kocham Cię!!!
-  </p>
-
-  <div class="gallery-slider">
-    <div class="slides">
-      <div class="slide" style="background-image: url('twoje_zdjecie1.jpg');"></div>
-      <div class="slide" style="background-image: url('twoje_zdjecie2.jpg');"></div>
-      <div class="slide" style="background-image: url('twoje_zdjecie3.jpg');"></div>
+  <div class="envelope-wrapper" onclick="openEnvelope()">
+    <div class="envelope">
+      <div class="flap"></div>
+      <div class="seal">❤</div>
     </div>
-    <button class="prev" onclick="plusSlides(-1)">❮</button>
-    <button class="next" onclick="plusSlides(1)">❯</button>
+    <div class="letter">
+    <h1>Maciusiu! Mój Koteczku!</h1>
+
+    <div class="image-placeholder" style="background-image: url('foto2.jpg');"></div>
+
+    <p>
+      W dniu Twoich imienin chcę Ci powiedzieć, jak bardzo jestem wdzięczna, że jesteś. Jesteś moim wsparciem, moją radością i bezpiecznym domkiem! Kocham w Tobie Twoje ciepełko, gałkankowość i to, jak potrafisz sprawić, że wszystkie troski w życiu znikają.
+    </p>
+
+    <div class="image-placeholder" style="background-image: url('foto1.jpg');"></div>
+
+    <p>
+      Życzę Ci spełnienia marzeń (jeśli jeszcze jakieś Ci zostały ;) ) i jeszcze więcej wspólnych chwil, które będą naszą codziennością. Zawsze obok, trzymając się za ręce. Kocham Cię!!!
+    </p>
+    </div>
   </div>
 
   <footer>
@@ -269,22 +351,11 @@
     canvas.height = window.innerHeight;
   });
 
-  let currentSlide = 0;
-  
-  function showSlide(index) {
-    const slides = document.querySelector(".slides");
-    const totalSlides = document.querySelectorAll(".slide").length;
-    currentSlide = (index + totalSlides) % totalSlides;
-    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  function openEnvelope() {
+    const wrapper = document.querySelector('.envelope-wrapper');
+    wrapper.classList.add('open');
   }
-  
-  function plusSlides(n) {
-    showSlide(currentSlide + n);
-  }
-  
-  showSlide(0);
 
-  
 </script>
 
 </body>
