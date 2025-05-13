@@ -1,262 +1,290 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dla Ciebie, Koteczku ♥️</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Georgia', serif;
-      background: linear-gradient(to bottom, #fef9f4, #fffaf7);
-      color: #3e3e3e;
-      overflow-x: hidden;
-      position: relative;
-    }
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dla Ciebie, Koteczku ♥️</title>
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          font-family: 'Georgia', serif;
+          background: linear-gradient(to bottom, #fef9f4, #fffaf7);
+          color: #3e3e3e;
+          overflow-x: hidden;
+          position: relative;
+        }
 
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2em 1em;
-      text-align: center;
-      position: relative;
-      z-index: 2;
-    }
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 2em 1em;
+          text-align: center;
+          position: relative;
+          z-index: 2;
+        }
 
-    .envelope-wrapper {
-      position: relative;
-      width: 90vw;
-      max-width: 800px;
-      height: 500px;
-      perspective: 1000px;
-      cursor: pointer;
-    }
+        .envelope-wrapper {
+          position: relative;
+          width: 90vw;
+          max-width: 800px;
+          height: 500px;
+          perspective: 1000px;
+          cursor: pointer;
+        }
 
-    .envelope {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      background: #f9f1f3;
-      border: 2px solid #e3a6b2;
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 1s ease-in-out;
-      z-index: 2;
-    }
+        .envelope {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          background: #f9f1f3;
+          border: 2px solid #e3a6b2;
+          border-radius: 12px;
+          overflow: hidden;
+          transition: transform 1s ease-in-out;
+          z-index: 2;
+        }
 
-    .flap {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 50%;
-      background: #e3a6b2;
-      clip-path: polygon(0 0, 100% 0, 50% 100%);
-      transform-origin: top;
-      transition: transform 1s ease-in-out;
-      z-index: 3;
-    }
+        .flap {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 50%;
+          background: #e3a6b2;
+          clip-path: polygon(0 0, 100% 0, 50% 100%);
+          transform-origin: top;
+          transition: transform 1s ease-in-out;
+          z-index: 3;
+        }
 
-    .seal {
-      position: absolute;
-      top: 225px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 50px;
-      background: #ffb6c1;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 22px;
-      color: white;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-      z-index: 4;
-      transition: opacity 0.3s ease;
-    }
+        .seal {
+          position: absolute;
+          top: 225px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 50px;
+          height: 50px;
+          background: #ffb6c1;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 22px;
+          color: white;
+          box-shadow: 0 0 8px rgba(0,0,0,0.1);
+          z-index: 4;
+          transition: opacity 0.3s ease;
+        }
 
-    .letter {
-      position: relative;
-      width: 80%;
-      height: 100%;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-      padding: 40px;
-      font-size: 18px;
-      line-height: 1.6;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-      overflow-y: auto;
-      z-index: 5;
-    }
+        .letter {
+          position: relative;
+          width: 80%;
+          height: 100%;
+          background: white;
+          border-radius: 12px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+          padding: 40px;
+          font-size: 18px;
+          line-height: 1.6;
+          opacity: 0;
+          transition: opacity 1s ease-in-out;
+          overflow-y: auto;
+          z-index: 5;
+        }
 
-    .open .flap {
-      transform: rotateX(-180deg);
-    }
+        .open .flap {
+          transform: rotateX(-180deg);
+        }
 
-    .open .seal {
-      opacity: 0;
-    }
+        .open .seal {
+          opacity: 0;
+        }
 
-    .open .letter {
-      opacity: 1;
-    }
+        .open .letter {
+          opacity: 1;
+        }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 0.5em;
-      color: #d46a6a;
-      animation: fadeIn 1.5s ease-out;
-    }
+        h1 {
+          font-size: 2.5em;
+          margin-bottom: 0.5em;
+          color: #d46a6a;
+          animation: fadeIn 1.5s ease-out;
+        }
 
-    p {
-      font-size: 1.2em;
-      line-height: 1.6;
-      margin: 1.5em 0;
-      animation: fadeIn 2s ease;
-    }
+        p {
+          font-size: 1.2em;
+          line-height: 1.6;
+          margin: 1.5em 0;
+          animation: fadeIn 2s ease;
+        }
 
-    .image-placeholder {
-      width: 90%;
-      max-width: 300px;
-      height: 250px;
-      margin: 1.5em auto;
-      border-radius: 12px;
-      background-color: #fbeaea;
-      background-size: cover;
-      background-position: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
+        .image-placeholder {
+          width: 90%;
+          max-width: 300px;
+          height: 250px;
+          margin: 1.5em auto;
+          border-radius: 12px;
+          background-color: #fbeaea;
+          background-size: cover;
+          background-position: center;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
 
-    .section-title {
-      font-size: 1.6em;
-      margin-top: 2em;
-      color: #c84e4e;
-      border-bottom: 1px solid #e9dede;
-      padding-bottom: 0.3em;
-      display: inline-block;
-    }
+        .section-title {
+          font-size: 1.6em;
+          margin-top: 2em;
+          color: #c84e4e;
+          border-bottom: 1px solid #e9dede;
+          padding-bottom: 0.3em;
+          display: inline-block;
+        }
 
-    ul {
-      text-align: left;
-      max-width: 600px;
-      margin: 1em auto;
-      padding-left: 1em;
-    }
+        ul {
+          text-align: left;
+          max-width: 600px;
+          margin: 1em auto;
+          padding-left: 1em;
+        }
 
-    ul li {
-      margin: 0.8em 0;
-      font-size: 1.1em;
-      position: relative;
-    }
+        ul li {
+          margin: 0.8em 0;
+          font-size: 1.1em;
+          position: relative;
+        }
 
-    ul li::before {
-      content: "♥";
-      color: #d46a6a;
-      margin-right: 0.5em;
-    }
+        ul li::before {
+          content: "♥";
+          color: #d46a6a;
+          margin-right: 0.5em;
+        }
 
-    footer {
-      margin-top: 3em;
-      font-size: 0.9em;
-      color: #999;
-    }
+        footer {
+          margin-top: 3em;
+          font-size: 0.9em;
+          color: #999;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
 
-    @media (max-width: 600px) {
-      h1 { font-size: 2em; }
-      p, ul li { font-size: 1em; }
-    }
+        @media (max-width: 600px) {
+          h1 { font-size: 2em; }
+          p, ul li { font-size: 1em; }
+        }
 
-    /* Serduszka */
-    .heart {
-      position: fixed;
-      width: 16px;
-      height: 16px;
-      background: pink;
-      clip-path: polygon(50% 0%, 61% 15%, 75% 0%, 100% 25%, 50% 100%, 0 25%, 25% 0%, 39% 15%);
-      opacity: 0.7;
-      animation: float 6s ease-in infinite;
-      z-index: 1;
-    }
+        /* Serduszka */
+        .heart {
+          position: fixed;
+          width: 16px;
+          height: 16px;
+          background: pink;
+          clip-path: polygon(50% 0%, 61% 15%, 75% 0%, 100% 25%, 50% 100%, 0 25%, 25% 0%, 39% 15%);
+          opacity: 0.7;
+          animation: float 6s ease-in infinite;
+          z-index: 1;
+        }
 
-    @keyframes float {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-800px) scale(0.6);
-        opacity: 0;
-      }
-    }
+        @keyframes float {
+          0% {
+            transform: translateY(0) scale(1);
+            opacity: 0.7;
+          }
+          100% {
+            transform: translateY(-800px) scale(0.6);
+            opacity: 0;
+          }
+        }
 
-    /* Fajerwerki / konfetti */
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
+        /* Fajerwerki / konfetti */
+        canvas {
+          position: fixed;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          z-index: 1;
+        }
 
-    .gallery-slider {
-      position: relative;
-      max-width: 90%;
-      margin: 2em auto;
-      overflow: hidden;
-      border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-    }
+        .gallery-slider {
+          position: relative;
+          max-width: 90%;
+          margin: 2em auto;
+          overflow: hidden;
+          border-radius: 16px;
+          box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
 
-    .slides {
-      display: flex;
-      transition: transform 0.6s ease;
-    }
+        .slides {
+          display: flex;
+          transition: transform 0.6s ease;
+        }
 
-    .slide {
-      min-width: 100%;
-      height: 250px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 16px;
-    }
+        .slide {
+          min-width: 100%;
+          height: 250px;
+          background-size: cover;
+          background-position: center;
+          border-radius: 16px;
+        }
 
-    .prev, .next {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.7);
-      border: none;
-      color: #c84e4e;
-      font-size: 2em;
-      padding: 0.2em 0.6em;
-      cursor: pointer;
-      border-radius: 50%;
-      transition: background 0.3s;
-      z-index: 3;
-    }
+        .prev, .next {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          background: rgba(255, 255, 255, 0.7);
+          border: none;
+          color: #c84e4e;
+          font-size: 2em;
+          padding: 0.2em 0.6em;
+          cursor: pointer;
+          border-radius: 50%;
+          transition: background 0.3s;
+          z-index: 3;
+        }
 
-    .prev:hover, .next:hover {
-      background: #ffeaea;
-    }
+        .prev:hover, .next:hover {
+          background: #ffeaea;
+        }
 
-    .prev { left: 10px; }
-    .next { right: 10px; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
 
-    @media (max-width: 600px) {
-      .slide { height: 180px; }
-      .prev, .next { font-size: 1.5em; }
-    }
+        @media (max-width: 600px) {
+          .slide { height: 180px; }
+          .prev, .next { font-size: 1.5em; }
+        }
 
-  </style>
+        .heart-button {
+<!--          position: absolute;-->
+          bottom: 20px;
+          right: 20px;
+          background: #ff6b81;
+          border: none;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          color: white;
+          font-size: 30px;
+          cursor: pointer;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+          z-index: 10;
+          transition: transform 0.2s ease;
+        }
+
+        .heart-button:hover {
+          transform: scale(1.1);
+        }
+
+        .heart {
+          position: absolute;
+          animation: float 10s linear forwards;
+          pointer-events: none;
+          z-index: 10;
+        }
+
+    </style>
 </head>
 <body>
 
@@ -264,96 +292,122 @@
 
 
 <div class="container">
-  <div class="envelope-wrapper" onclick="openEnvelope()">
-    <div class="envelope">
-      <div class="flap"></div>
-      <div class="seal">❤</div>
+    <div class="envelope-wrapper" onclick="openEnvelope()">
+        <div class="envelope">
+            <div class="flap"></div>
+            <div class="seal">❤</div>
+        </div>
+        <div class="letter">
+            <h1>Maciusiu! <br> Mój Koteczku!</h1>
+
+            <div class="image-placeholder" style="background-image: url('foto2.jpg');"></div>
+
+            <p>
+                W dniu Twoich imienin chcę Ci powiedzieć, jak bardzo jestem wdzięczna, że jesteś. Jesteś moim wsparciem,
+                moją
+                radością i bezpiecznym domkiem! Kocham w Tobie Twoje ciepełko, gałkankowość i to, jak potrafisz sprawić,
+                że
+                wszystkie troski w życiu znikają.
+            </p>
+
+            <div class="image-placeholder" style="background-image: url('foto1.jpg');"></div>
+
+            <p>
+                Życzę Ci spełnienia marzeń (jeśli jeszcze jakieś Ci zostały ;) ) i jeszcze więcej wspólnych chwil, które
+                będą
+                naszą codziennością. Zawsze obok, trzymając się za ręce. Kocham Cię!!!
+            </p>
+
+            <button class="heart-button" onclick="dropHearts(event)">💖</button>
+        </div>
+
     </div>
-    <div class="letter">
-    <h1>Maciusiu! <br> Mój Koteczku!</h1>
 
-    <div class="image-placeholder" style="background-image: url('foto2.jpg');"></div>
-
-    <p>
-      W dniu Twoich imienin chcę Ci powiedzieć, jak bardzo jestem wdzięczna, że jesteś. Jesteś moim wsparciem, moją radością i bezpiecznym domkiem! Kocham w Tobie Twoje ciepełko, gałkankowość i to, jak potrafisz sprawić, że wszystkie troski w życiu znikają.
-    </p>
-
-    <div class="image-placeholder" style="background-image: url('foto1.jpg');"></div>
-
-    <p>
-      Życzę Ci spełnienia marzeń (jeśli jeszcze jakieś Ci zostały ;) ) i jeszcze więcej wspólnych chwil, które będą naszą codziennością. Zawsze obok, trzymając się za ręce. Kocham Cię!!!
-    </p>
-    </div>
-  </div>
-
-  <footer>
-    Stworzone z miłością tylko dla Ciebie – Twoja Kicia Kocia
-  </footer>
+    <footer>
+        Stworzone z miłością tylko dla Ciebie – Twoja Kicia Kocia
+    </footer>
 </div>
 
 <script>
-  // Serduszka
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.background = ['#fbb', '#fcc', '#fdd', '#eec', '#fde'][Math.floor(Math.random() * 5)];
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-  }
-  setInterval(createHeart, 300);
-
-  // Konfetti
-  const canvas = document.getElementById("confetti");
-  const ctx = canvas.getContext("2d");
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  let particles = [];
-
-  function createConfetti() {
-    const colors = ["#ffd1dc", "#ffdee3", "#e0c3fc", "#c2e9fb"];
-    for (let i = 0; i < 5; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: 0,
-        size: Math.random() * 4 + 2,
-        speedY: Math.random() * 2 + 1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-        alpha: 1
-      });
+    // Serduszka
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.background = ['#fbb', '#fcc', '#fdd', '#eec', '#fde'][Math.floor(Math.random() * 5)];
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
     }
-  }
+    setInterval(createHeart, 300);
 
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach((p, i) => {
-      ctx.fillStyle = p.color;
-      ctx.globalAlpha = p.alpha;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fill();
-      p.y += p.speedY;
-      p.alpha -= 0.005;
-      if (p.alpha <= 0) particles.splice(i, 1);
-    });
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(animate);
-  }
-
-  animate();
-  setInterval(createConfetti, 300);
-
-  window.addEventListener('resize', () => {
+    // Konfetti
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-  });
 
-  function openEnvelope() {
-    const wrapper = document.querySelector('.envelope-wrapper');
-    wrapper.classList.add('open');
-  }
+    let particles = [];
 
+    function createConfetti() {
+      const colors = ["#ffd1dc", "#ffdee3", "#e0c3fc", "#c2e9fb"];
+      for (let i = 0; i < 5; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: 0,
+          size: Math.random() * 4 + 2,
+          speedY: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1
+        });
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach((p, i) => {
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        p.y += p.speedY;
+        p.alpha -= 0.005;
+        if (p.alpha <= 0) particles.splice(i, 1);
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+    setInterval(createConfetti, 300);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+
+    function openEnvelope() {
+      const wrapper = document.querySelector('.envelope-wrapper');
+      wrapper.classList.add('open');
+    }
+
+    function dropHearts(e) {
+      e.stopPropagation();
+      for (let i = 0; i < 50; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerText = Math.random() < 0.5 ? '💖' : '😘';
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.top = '100%';
+        heart.style.fontSize = `${Math.random() * 20 + 20}px`;
+        heart.style.animationDuration = `${Math.random() * 2 + 4}s`;
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+    }
 </script>
 
 </body>
